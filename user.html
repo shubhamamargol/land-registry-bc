@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Land Registry - User</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f6f9;
+    }
+
+    .header {
+      background-color: #1f3c88;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h2 {
+      margin: 0;
+    }
+
+    .header button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button.action {
+      background-color: #1f3c88;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button.action:hover {
+      background-color: #162f6a;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .badge {
+      background: #28a745;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h2>Government Land Registry - User Panel</h2>
+    <!DOCTYPE html>
+
+<html>
+<head>
+  <title>Government Land Registry - User</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f6f9;
+    }
+
+    .header {
+      background-color: #1f3c88;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h2 {
+      margin: 0;
+    }
+
+    .header button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button.action {
+      background-color: #1f3c88;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button.action:hover {
+      background-color: #162f6a;
+    }
+
+    .result {
+      margin-top:20px;
+      background:#f0f0f0;
+      padding:15px;
+      border-radius:6px;
+      line-height:1.7;
+    }
+
+    .badge {
+      background: #28a745;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="header">
+    <h2> Land Registry - User Panel</h2>
+
+```
+<div>
+  <span class="badge">Role: User (View Only)</span>
+  <button onclick="logout()">Logout</button>
+</div>
+```
+
+  </div>
+
+  <div class="container">
+
+```
+<div class="card">
+
+  <h3>View Land Details</h3>
+
+  <input type="number" id="searchId" placeholder="Enter Land ID">
+
+  <button class="action" onclick="getLand()">Get Land</button>
+
+  <div id="landData" class="result"></div>
+
+</div>
+```
+
+  </div>
+
+<script>
+
+  if (localStorage.getItem("role") !== "user") {
+    alert("Access denied");
+    window.location.href = "login.html";
+  }
+
+  async function getLand() {
+
+    const id = document.getElementById("searchId").value;
+
+    const response = await fetch(`http://localhost:5000/land/${id}`);
+    const data = await response.json();
+
+    document.getElementById("landData").innerHTML = `
+    
+    <b>Land ID:</b> ${data.id}<br><br>
+
+    <b>Location:</b> ${data.location}<br><br>
+
+    <b>Area:</b> ${data.area} sq.ft<br><br>
+
+    <b>Owner Name:</b> ${data.ownerName}<br><br>
+
+    <b>Owner Address:</b> ${data.ownerAddress}<br><br>
+
+    <b>Blockchain Status:</b> ${data.ownerDisplay}<br><br>
+
+    <b>Registered:</b> ${data.isRegistered}
+
+    `;
+
+  }
+
+  function logout() {
+    localStorage.removeItem("role");
+    window.location.href = "login.html";
+  }
+
+</script>
+
+</body>
+</html>
+
+
+  <script>
+    if (localStorage.getItem("role") !== "user") {
+      alert("Access denied");
+      window.location.href = "login.html";
+    }
+
+    async function getLand() {
+      const id = document.getElementById("searchId").value;
+
+      const response = await fetch(`http://localhost:5000/land/${id}`);
+      const data = await response.json();
+
+      document.getElementById("landData").innerText =
+        JSON.stringify(data, null, 2);
+    }
+
+    function logout() {
+      localStorage.removeItem("role");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
